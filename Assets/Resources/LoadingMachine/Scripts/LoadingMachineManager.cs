@@ -1,4 +1,4 @@
-﻿
+﻿using System;
 using UnityEngine;
 
 public class LoadingMachineManager : MonoBehaviour
@@ -9,6 +9,23 @@ public class LoadingMachineManager : MonoBehaviour
     private bool isLoading = false;
     private bool isCanOffLoading = false;
     private bool isShowLog = true;
+    private delegate void offLoadingCallback();
+   
+    private Delegate openFinishCallback;
+    private Delegate offFinishCallback;
+
+ 
+    public void SetOpenFinishCallback(Delegate inCallback)
+    {
+        if (openFinishCallback == null)
+            openFinishCallback = inCallback;
+    }
+
+    public void SetOffFinishCallback(Delegate inCallback)
+    {
+        if (offFinishCallback == null)
+            offFinishCallback = inCallback;
+    }
 
     public void OpenWindowLoading(string inText)
     {
@@ -22,6 +39,20 @@ public class LoadingMachineManager : MonoBehaviour
         isLoading = true;
         loadingType = 0;
         LoadingMachineDisplay.OpenWindowLoading(inText);
+    }
+
+    public void OpenNoEffectFullScreenLoading()
+    {
+        if (isLoading)
+        {
+            if (isShowLog)
+                Debug.Log("ALLREADY LOADING");
+            return;
+        }
+
+        isLoading = true;
+        loadingType = 1;
+        LoadingMachineDisplay.OpenNoEffectFullScreenLoading();
     }
 
     public void OpenFullScreenLoading()
@@ -41,6 +72,12 @@ public class LoadingMachineManager : MonoBehaviour
     public void OpenLoadingFinish()
     {
         isCanOffLoading = true;
+
+        if(openFinishCallback!=null)
+        {
+            openFinishCallback.DynamicInvoke();
+            openFinishCallback = null;
+        }
     }
 
     public void OffLoading()
@@ -48,7 +85,7 @@ public class LoadingMachineManager : MonoBehaviour
         if (!isLoading || !isCanOffLoading)
         {
             if (isShowLog)
-                Debug.Log("CAN OFF LOADING");
+                Debug.Log("CAN NOT OFF LOADING");
             return;
         }
 
@@ -69,6 +106,12 @@ public class LoadingMachineManager : MonoBehaviour
     {
         isLoading = false;
         isCanOffLoading = false;
+
+        if (offFinishCallback != null)
+        {
+            offFinishCallback.DynamicInvoke();
+            offFinishCallback = null;
+        }
     }
 
 

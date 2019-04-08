@@ -11,6 +11,7 @@ public class LoadingMachineDisplay : MonoBehaviour
     public Animator LoadingTextAnimator;
     public GameObject WindowLoadingObject;
     public GameObject FullScreenLoadingObject;
+    public GameObject LoadingMachinePanel;
 
     public LoadingMachineManager LoadingMachineManager;
 
@@ -21,6 +22,7 @@ public class LoadingMachineDisplay : MonoBehaviour
     public void OpenWindowLoading(string inText)
     {
         LoadingText.text = inText;
+        LoadingMachinePanel.transform.localPosition = openPosition;
         WindowLoadingObject.transform.localPosition = openPosition;
 
         WindowLoadingAnimator.Play("OpenWindowLoading");
@@ -41,13 +43,22 @@ public class LoadingMachineDisplay : MonoBehaviour
     public void OffWindowLoadingAnimationFinish()
     {
         WindowLoadingObject.transform.localPosition = offPosition;
+        LoadingMachinePanel.transform.localPosition = offPosition;
         LoadingMachineManager.OffLoadingFinish();
     }
 
     public void OpenFullScreenLoading()
     {
+        LoadingMachinePanel.transform.localPosition = openPosition;
         FullScreenLoadingObject.transform.localPosition = openPosition;
         FullScrennLoadingAnimator.Play("OpenFullscreenLoading");
+    }
+
+    public void OpenNoEffectFullScreenLoading()
+    {
+        LoadingMachinePanel.transform.localPosition = openPosition;
+        FullScreenLoadingObject.transform.localPosition = openPosition;
+        FullScrennLoadingAnimator.Play("NoEffectOpenFullScreenLoading");
     }
 
     public void OpenFullScreenAnimationFinish()
@@ -65,6 +76,7 @@ public class LoadingMachineDisplay : MonoBehaviour
     public void OffFullScreenLoadingAnimationFinish()
     {
         FullScreenLoadingObject.transform.localPosition = offPosition;
+        LoadingMachinePanel.transform.localPosition = offPosition;
         LoadingMachineManager.OffLoadingFinish();
     }
 }

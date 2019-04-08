@@ -665,6 +665,7 @@ MonoBehaviour:
   LoadingTextAnimator: {fileID: 4089055271619392123}
   WindowLoadingObject: {fileID: 1119556054591090494}
   FullScreenLoadingObject: {fileID: 1119556053648131536}
+  LoadingMachinePanel: {fileID: 1119556055444344703}
   LoadingMachineManager: {fileID: 144493535080811730}
 --- !u!1 &1120523119034326939
 GameObject:
