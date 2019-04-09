@@ -5,7 +5,7 @@ public class LoadingMachineManager : MonoBehaviour
 {
 
     public LoadingMachineDisplay LoadingMachineDisplay;
-    private int loadingType = 0;//0:window loading  1:fullScreen loading
+    private int loadingType = 0;//0:window loading  1:fullScreen loading 2:fullScreen black
     private bool isLoading = false;
     private bool isCanOffLoading = false;
     private bool isShowLog = true;
@@ -69,6 +69,20 @@ public class LoadingMachineManager : MonoBehaviour
         LoadingMachineDisplay.OpenFullScreenLoading();
     }
 
+    public void OpenFullScreenBlack()
+    {
+        if (isLoading)
+        {
+            if (isShowLog)
+                Debug.Log("ALLREADY LOADING");
+            return;
+        }
+
+        isLoading = true;
+        loadingType = 2;
+        LoadingMachineDisplay.OpenFullScreenBlack();
+    }
+
     public void OpenLoadingFinish()
     {
         isCanOffLoading = true;
@@ -96,6 +110,9 @@ public class LoadingMachineManager : MonoBehaviour
                 break;
             case 1:
                 LoadingMachineDisplay.OffFullScreenLoading();
+                break;
+            case 2:
+                LoadingMachineDisplay.OffFullScreenBlack();
                 break;
             default:
                 break; 

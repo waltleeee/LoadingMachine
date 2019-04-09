@@ -14,4 +14,9 @@ public class FullScreenLoadingAnimationReporter : MonoBehaviour
     {
         LoadingMachineDisplay.OffFullScreenLoadingAnimationFinish();
     }
+
+    public void OpenFullScreenBlackFinish()
+    {
+        LoadingMachineDisplay.OpenFullScreenBlackFinish();
+    }
 }

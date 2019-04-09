@@ -84,5 +84,22 @@ public class SampleScript : MonoBehaviour
         LoadingMachineManager.OpenNoEffectFullScreenLoading();
     }
 
+    public void OnFullScreenBlack()
+    {
+        if (isNeedCallback)
+        {
+            testFunction callback = delegate ()
+            {
+                Debug.Log("OPEN FINISH OK");
+            };
+
+            LoadingMachineManager.SetOpenFinishCallback(callback);
+        }
+
+
+
+        LoadingMachineManager.OpenFullScreenBlack();
+    }
+
 
 }

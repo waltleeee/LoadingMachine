@@ -61,9 +61,21 @@ public class LoadingMachineDisplay : MonoBehaviour
         FullScrennLoadingAnimator.Play("NoEffectOpenFullScreenLoading");
     }
 
+    public void OpenFullScreenBlack()
+    {
+        LoadingMachinePanel.transform.localPosition = openPosition;
+        FullScreenLoadingObject.transform.localPosition = openPosition;
+        FullScrennLoadingAnimator.Play("OpenFullScreenBlack");
+    }
+
     public void OpenFullScreenAnimationFinish()
     {
         LoadingTextAnimator.Play("OpenLoadingText");
+        LoadingMachineManager.OpenLoadingFinish();
+    }
+
+    public void OpenFullScreenBlackFinish()
+    {
         LoadingMachineManager.OpenLoadingFinish();
     }
 
@@ -71,6 +83,11 @@ public class LoadingMachineDisplay : MonoBehaviour
     {
         LoadingTextAnimator.Play("LoadingTextIdle");
         FullScrennLoadingAnimator.Play("OffFullscreenLoading");
+    }
+
+    public void OffFullScreenBlack()
+    {
+        FullScrennLoadingAnimator.Play("OffFullScreenBlack");
     }
 
     public void OffFullScreenLoadingAnimationFinish()
